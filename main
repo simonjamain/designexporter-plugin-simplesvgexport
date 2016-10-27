@@ -2,7 +2,6 @@
 # encoding: utf-8
 require 'yaml'
 require_relative 'exportsvg.rb'
-require 'byebug'
 
 configurationFile = ARGV[0].to_s
 
@@ -12,7 +11,6 @@ configuration = YAML.load(File.read(configurationFile))['simplesvgexport']
 # pour chaque fichier source/destination
 Dir.chdir(File.dirname(configurationFile)) do
   configuration.each do |options|
-    byebug
     exportsvg options['in'], options['out'] if File.readable?(options['in'])
   end
 end
