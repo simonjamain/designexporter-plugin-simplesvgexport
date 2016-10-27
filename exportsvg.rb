@@ -1,8 +1,5 @@
-require 'nokogiri'
 require 'fileutils'
 require 'shellwords'
-require 'tempfile'
-require 'byebug'
 
 def exportsvg (sourceFileName, outputFileName)
 

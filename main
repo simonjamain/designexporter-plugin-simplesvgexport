@@ -11,6 +11,12 @@ configuration = YAML.load(File.read(configurationFile))['simplesvgexport']
 # pour chaque fichier source/destination
 Dir.chdir(File.dirname(configurationFile)) do
   configuration.each do |options|
+
+    begin
+      next if isAnterior? options['in'], object['out']
+    rescue
+    end
+
     exportsvg options['in'], options['out'] if File.readable?(options['in'])
   end
 end
