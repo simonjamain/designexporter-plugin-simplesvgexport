@@ -3,6 +3,10 @@
 require 'yaml'
 require_relative 'exportsvg.rb'
 
+def isAnterior?(oldFile, newFile)
+  File.mtime(oldFile) < File.mtime(newFile)
+end
+
 configurationFile = ARGV[0].to_s
 
 # charger la configuration
@@ -11,9 +15,9 @@ configuration = YAML.load(File.read(configurationFile))['simplesvgexport']
 # pour chaque fichier source/destination
 Dir.chdir(File.dirname(configurationFile)) do
   configuration.each do |options|
-
+    
     begin
-      next if isAnterior? options['in'], object['out']
+      next if isAnterior? options['in'], options['out']
     rescue
     end
 
